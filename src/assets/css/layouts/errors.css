@@ -1,0 +1,10 @@
+.error-main {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #13322B, #17443a) no-repeat center center fixed;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}

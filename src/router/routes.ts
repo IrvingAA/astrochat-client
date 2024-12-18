@@ -1,18 +1,14 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteIC } from '@/core/types/config/RouterInterface';
+import errorRoutes from './errors.routes';
+import authRoutes from './auth.routes';
+import dashboardRoutes from './dashboard.routes';
+import testRoutes from './test.routes';
 
-const routes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
-  },
-
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
-  },
+const routes: RouteIC[] = [
+  ...errorRoutes,
+  ...testRoutes,
+  ...authRoutes,
+  ...dashboardRoutes,
 ];
 
 export default routes;
