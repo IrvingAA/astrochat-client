@@ -118,7 +118,7 @@ onMounted(async () => {
 
 // Actualizar cuando llegue un nuevo mensaje
 watch(result, async (newData) => {
-  console.log("New subscription data:", newData); // Para asegurarse de que llegan los datos correctamente
+
   if (newData?.newMessage) {
     try {
       const parsedMessage = JSON.parse(newData.newMessage); // Asegúrate de que el mensaje llega como JSON si es necesario

@@ -26,9 +26,7 @@ const fetchChatRooms = async () => {
   }
 };
 
-const addNewRoom = () => {
-  console.log('Nueva sala agregada');
-};
+const addNewRoom = () => {};
 
 onMounted(() => {
   fetchChatRooms();
@@ -86,7 +84,9 @@ onMounted(() => {
           <q-icon :name="room.icon || 'mdi-chat'" size="md" color="primary" />
         </q-item-section>
         <q-item-section>
-          <q-item-label class="tw-text-sm tw-text-white tw-font-medium">{{ room.label }}</q-item-label>
+          <q-item-label class="tw-text-sm tw-text-white tw-font-medium">{{
+            room.label
+          }}</q-item-label>
         </q-item-section>
         <q-item-section side>
           <StarIcon v-if="room.badge" :active="room.badge" />

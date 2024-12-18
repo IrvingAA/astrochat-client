@@ -43,9 +43,6 @@ export default class AuthDatabase extends Database {
     const user = await this.$getItem<UserIc>(this.items.user);
     const accessToken = await this.$getItem<TokenIC>(this.items.accessToken);
 
-    console.log('user', user);
-    console.log('accessToken', accessToken);
-
     return {
       user: user ?? null,
       accessToken: accessToken ?? null
