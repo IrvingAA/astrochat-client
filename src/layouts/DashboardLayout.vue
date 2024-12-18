@@ -17,7 +17,6 @@ const goToIndex = () => {
 </script>
 
 <template>
-  <!-- Async component -->
   <DialogSession />
 
   <q-layout view="hHh LpR fff">
@@ -49,7 +48,6 @@ const goToIndex = () => {
       <MenuNavegacion />
     </q-drawer>
 
-    <!-- Contenido de la app -->
     <q-page-container style="background-color: black">
       <q-page>
         <router-view />

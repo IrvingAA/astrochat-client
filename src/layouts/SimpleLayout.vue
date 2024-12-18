@@ -24,7 +24,6 @@ const env = useEnv()
       </q-toolbar>
     </q-header>
 
-    <!-- Contenido de la app -->
     <q-page-container class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-mx-10">
       <q-card class="tw-my-7 tw-w-full">
         <q-card-section>

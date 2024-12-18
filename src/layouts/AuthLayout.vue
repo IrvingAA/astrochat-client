@@ -45,10 +45,8 @@ const guestLogin = () => {
 <template>
   <body>
     <div class="astrochat-container">
-      <!-- Título centrado -->
       <h1 class="astrochat-title">AstroChat</h1>
 
-      <!-- Tarjeta de Login -->
       <q-card class="astrochat-card tw-shadow-2xl tw-rounded-xl tw-bg-white">
         <q-card-section class="tw-text-center tw-py-5">
           <q-icon
@@ -59,12 +57,10 @@ const guestLogin = () => {
           <div class="tw-text-lg tw-font-semibold tw-mt-3 tw-text-gray-800">Iniciar sesión</div>
         </q-card-section>
 
-        <!-- Formulario -->
         <q-card-section>
           <LoginPage />
         </q-card-section>
 
-        <!-- Footer -->
         <q-card-section class="tw-text-center tw-text-gray-500 tw-text-xs tw-mt-4">
           © 2024 AstroChat. Todos los derechos reservados.
         </q-card-section>
@@ -74,7 +70,6 @@ const guestLogin = () => {
 </template>
 
 <style scoped>
-
 .astrochat-container {
   display: flex;
   flex-direction: column;

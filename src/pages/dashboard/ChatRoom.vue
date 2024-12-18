@@ -1,6 +1,5 @@
 <template>
   <div class="flex h-screen bg-gray-100">
-    <!-- Room List -->
     <div class="w-64 bg-white p-4 flex flex-col h-full border-r">
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold">Rooms</h2>
@@ -25,7 +24,6 @@
       </q-scroll-area>
     </div>
 
-    <!-- Chat Area -->
     <div class="flex-1 flex flex-col h-full">
       <div v-if="selectedRoom" class="flex-1 flex flex-col">
         <q-scroll-area class="flex-1 p-4">
@@ -51,7 +49,6 @@
       </div>
     </div>
 
-    <!-- Add Room Modal -->
     <q-dialog v-model="isAddRoomModalOpen">
       <q-card class="p-4" style="min-width: 300px">
         <q-card-section>
@@ -106,7 +103,6 @@ const newMessage = ref('')
 
 const selectRoom = (roomId: string) => {
   selectedRoom.value = roomId
-  // In a real application, you would fetch messages for the selected room here
   messages.value = [
     { id: '1', content: 'Hello!', sender: 'User1', timestamp: '2023-04-20 10:00:00' },
     { id: '2', content: 'Hi there!', sender: 'User2', timestamp: '2023-04-20 10:01:00' },
@@ -143,7 +139,3 @@ const sendMessage = () => {
   }
 }
 </script>
-
-<style scoped>
-/* Add any additional component-specific styles here */
-</style>

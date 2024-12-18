@@ -11,7 +11,7 @@ export default function useFormRules() {
     const message = 'Campo requerido';
 
     if (v === null || v === undefined) return message;
-    if (typeof v === 'boolean') return true; // Agrega esta línea para manejar booleanos
+    if (typeof v === 'boolean') return true;
     if (typeof v === 'number' && v === 0) return true;
     if (Array.isArray(v) && v.length === 0) return message;
 

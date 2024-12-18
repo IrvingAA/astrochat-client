@@ -67,7 +67,6 @@ const registerHandler = async (): Promise<void> => {
 </script>
 
 <template>
-  <!-- Login Form -->
   <q-form @submit="loginHandler" autocomplete="off">
     <FormsGeneratorTS
       v-model="loginFormGenerator.loginFG"
@@ -112,7 +111,6 @@ const registerHandler = async (): Promise<void> => {
     </div>
   </q-form>
 
-  <!-- Register Modal -->
   <q-dialog v-model="isRegisterModalOpen" persistent>
     <q-card class="tw-w-full sm:tw-w-96">
       <q-card-section class="bg-blue-600 text-white">

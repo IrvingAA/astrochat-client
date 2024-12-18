@@ -15,27 +15,27 @@ async function nextFactory(context: NextFactoryContextIC, middlewares: Middlewar
   };
 }
 
-// Función recursiva para obtener todos los padres de una ruta
+
 function findAllParentRoutes(childPath: string, routes: RouteRecordRaw[], visitedPaths: string[] = []): RouteRecordRaw[] {
   for (const route of routes) {
-    // Evita ciclos infinitos verificando si ya visitamos esta ruta
+
     if (visitedPaths.includes(route.path)) {
-      continue; // Ya hemos visitado esta ruta, la ignoramos
+      continue;
     }
 
-    // Verifica si la ruta actual tiene hijos y si alguno de esos hijos coincide con el childPath
+
     if (route.children && route.children.some((child) => child.path === childPath)) {
-      // Marca la ruta actual como visitada
+
       visitedPaths.push(route.path);
 
-      // Busca los padres de esta ruta recursivamente
+
       const parents = findAllParentRoutes(route.path, routes, visitedPaths);
 
-      // Devuelve este padre junto con los padres anteriores
+
       return [...parents, route];
     }
 
-    // Si hay rutas hijas, busca recursivamente en los hijos
+
     if (route.children) {
       const foundInChildren = findAllParentRoutes(childPath, route.children, visitedPaths);
       if (foundInChildren.length > 0) {
@@ -44,7 +44,7 @@ function findAllParentRoutes(childPath: string, routes: RouteRecordRaw[], visite
     }
   }
 
-  // Si no se encontró la ruta padre, devuelve un array vacío
+
   return [];
 }
 
@@ -61,7 +61,7 @@ async function implementsMiddlewareOnRouter(router: Router): Promise<void> {
 
     const parents = findAllParentRoutes(to.path, router.getRoutes());
 
-    //por cada padre, si tiene middlewares, los agrega
+
     parents.forEach((parent) => {
       if (parent.meta?.middlewares && Array.isArray(parent.meta.middlewares) && parent.meta.middlewares.length) {
         allMiddlewares.push(...parent.meta.middlewares);
@@ -72,7 +72,7 @@ async function implementsMiddlewareOnRouter(router: Router): Promise<void> {
       allMiddlewares.push(...to.meta.middlewares);
     }
 
-    //Eliminar middlewares duplicados
+
     const uniqueMiddlewares = allMiddlewares.filter((middleware, index) => allMiddlewares.indexOf(middleware) === index);
 
     /**

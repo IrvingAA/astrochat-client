@@ -16,16 +16,14 @@ const { result } = useSubscription(MESSAGE_SUBSCRIPTION);
 
 const cardTitle = ref('AstroChat');
 const newMessage = ref('');
-const messages = ref<any[]>([]); // Todos los mensajes
-let messagesCache: any[] = []; // Cache para los mensajes
-const isAtBottom = ref(true); // Para saber si el usuario está al final del scroll
+const messages = ref<any[]>([]);
+let messagesCache: any[] = [];
+const isAtBottom = ref(true);
 
 const messagesService = new MessagesService();
 
-// Computed para los mensajes
 const allMessages = computed(() => messages.value);
 
-// Cargar mensajes iniciales
 const fetchMessages = async () => {
   if (messagesCache.length) {
     messages.value = messagesCache;
@@ -46,11 +44,10 @@ const fetchMessages = async () => {
   }
 };
 
-// Enviar un mensaje
 const sendMessage = async () => {
   if (newMessage.value.trim()) {
     const message = {
-      _id: Date.now(), // ID único por mensaje
+      _id: Date.now(),
       senderUuid: { username: 'me' },
       avatar: 'https://cdn.quasar.dev/img/avatar1.jpg',
       content: newMessage.value,
@@ -84,7 +81,6 @@ const scrollToBottom = () => {
   }
 };
 
-// Detectar cuando el usuario está en el top de la lista para cargar más mensajes
 const handleScroll = () => {
   const container = messagesContainer.value;
   if (container) {
@@ -97,7 +93,6 @@ const handleScroll = () => {
   }
 };
 
-// Cargar mensajes más antiguos
 const loadOlderMessages = async () => {
   const olderMessages = await messagesService.index({
     chatRoomUuid: '9de07712-30b1-4336-b86e-5b4febec2eb0',
@@ -116,12 +111,10 @@ onMounted(async () => {
   scrollToBottom();
 });
 
-// Actualizar cuando llegue un nuevo mensaje
 watch(result, async (newData) => {
-
   if (newData?.newMessage) {
     try {
-      const parsedMessage = JSON.parse(newData.newMessage); // Asegúrate de que el mensaje llega como JSON si es necesario
+      const parsedMessage = JSON.parse(newData.newMessage);
       const newMessageData = {
         _id: Date.now(),
         senderUuid: { username: parsedMessage.createdBy || 'Unknown' },
@@ -134,10 +127,10 @@ watch(result, async (newData) => {
 
       if (!messages.value.some((msg) => msg.content === newMessageData.content)) {
         messages.value.push(newMessageData);
-        messagesCache.push(newMessageData); // Actualiza la caché
+        messagesCache.push(newMessageData);
       }
       await nextTick();
-      scrollToBottom(); // Asegúrate de hacer scroll hacia abajo si es necesario
+      scrollToBottom();
     } catch (error) {
       console.error('Error parsing live message:', error);
     }
@@ -158,7 +151,6 @@ const parseDate = (date: string) => new Date(date).toLocaleString() || Date.now(
       {{ cardTitle }}
     </q-card-section>
 
-    <!-- Contenedor de mensajes con scroll controlado -->
     <q-card-section class="tw-flex-grow q-pa-md" style="height: 100%; overflow-y: hidden">
       <div
         ref="messagesContainer"
@@ -182,7 +174,6 @@ const parseDate = (date: string) => new Date(date).toLocaleString() || Date.now(
       </div>
     </q-card-section>
 
-    <!-- Sección de entrada de texto y botón para enviar -->
     <q-card-actions
       class="q-pa-md bg-gray-900 flex items-center justify-between"
       style="border-top: 1px solid #444"
@@ -196,7 +187,7 @@ const parseDate = (date: string) => new Date(date).toLocaleString() || Date.now(
         dark
         class="tw-flex-grow q-mx-md"
         @keyup.enter="sendMessage"
-        style="min-width: 0; max-width: 100%;"
+        style="min-width: 0; max-width: 100%"
       />
       <q-btn round unelevated color="positive" icon="mdi-send" size="md" @click="sendMessage" />
     </q-card-actions>
