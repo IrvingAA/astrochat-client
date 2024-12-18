@@ -3,18 +3,24 @@ import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { provideApolloClient } from '@vue/apollo-composable'
 import useEnv from '@/core/composables/useEnv'
+import path from 'path'
+import dotenv from 'dotenv'
+dotenv.config({ path: path.resolve(__dirname, '../../.env') })
+const isDockerRunning = process.env.RUNNING_IN_DOCKER === 'true'
+const mongoUri = isDockerRunning
+  ? process.env.MONGO_URI_DOCKER
+  : process.env.MONGO_URI_LOCAL
+const graphqlUrl = process.env.GRAPHQL_WS_URL
 
-const env = useEnv()
 
-console.log('env', env)
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3000/graphql',
+  uri: mongoUri
 })
 
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:3000/graphql',
+  uri: graphqlUrl || 'ws://localhost:3000/graphql',
   options: { reconnect: true },
 })
 
@@ -32,7 +38,6 @@ const apolloClient = new ApolloClient({
   link,
 })
 
-// Proporcionar Apollo globalmente
 provideApolloClient(apolloClient)
 
 export default apolloClient

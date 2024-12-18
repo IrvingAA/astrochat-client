@@ -28,5 +28,7 @@ declare namespace NodeJS {
     JWT_SECRET: string | undefined;
     GRAPHQL_URL: string | undefined;
     GRAPHQL_WS_URL: string | undefined;
+    MONGO_URI_DOCKER: string | undefined;
+    MONGO_URI_LOCAL: string | undefined;
   }
 }
